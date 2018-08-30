@@ -9,7 +9,7 @@ const bodyparser = require('body-parser');
 const express = require('express');
 const app = express();
 
-//Mildewares
+//Milddewares
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json()) //Permite mensajes con estructura tipo JSON
 
