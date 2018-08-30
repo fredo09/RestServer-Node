@@ -1,0 +1,9 @@
+/**
+* Configurar Variables Globales
+*/
+
+//====================
+//  Puerto
+//====================
+
+process.env.PORT = process.env.PORT || 3000
