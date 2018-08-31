@@ -4,6 +4,7 @@
 
 const mongoose = require('mongoose')
 
+//DA UN ASPECTO AMIGABLE SOBRE ALGUN ERROR EN PARTICULAR
 const uniqueValidator = require('mongoose-unique-validator')
 
 //Asignando Schema
@@ -38,11 +39,11 @@ let usuarioSchema = new Schema({
   role:{
     type:String,
     default: 'USER_ROLE',
-    enum: rolesValidos
+    enum: rolesValidos //REGLAS DE VALIDACION
   },
   estado:{
     type:Boolean,
-    defautl:true
+    default:true
   },
   google:{
     type:Boolean,
@@ -50,10 +51,19 @@ let usuarioSchema = new Schema({
   }
 });
 
+//Quitando elementos del json de usuarios en MongoDB
+usuarioSchema.methods.toJSON = function (){
+  let user = this;
+  let UserObject = user.toObject();
+  delete UserObject.password; //quitamos de la vista el elemento password
+
+  return UserObject;
+}
+
 //Agregando uniqueValidator mongoose
 usuarioSchema.plugin(uniqueValidator, {
   message: '{PATH} dede ser único'
 })
 
 //Exportando el Schema de Usuarios
-module.exports = mongoose.model('Usuario', usuarioSchema)
+module.exports = mongoose.model('Users', usuarioSchema)
