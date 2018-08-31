@@ -24,7 +24,7 @@ let urlBD;
 if ( urlBD === 'dev' ){
     urlBD = 'mongodb://localhost:27017/Cafe';
 }else{
-    urlBD = 'mongodb://cafe-user:ERcilrumhybcim2@ds139632.mlab.com:39632/cafe'
+    urlBD = process.env.MONGO_URI
 }
 
 //Creando processdo de entorno
