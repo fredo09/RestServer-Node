@@ -10,16 +10,15 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 
-const paths_usuarios = require('../routers/usuarios')
 
-//Mildewares
+//Middlewares
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json()) //Permite mensajes con estructura tipo JSON
 
-app.use(paths_usuarios) //USANDO LAS RUTAS DE USUARIOS
+app.use(require('../routers'))
 
 //Conexion a mongodb
-mongoose.connect(process.env.URL_DB , { useNewUrlParser: true }, (err, res) =>{
+mongoose.connect(process.env.URL_DB, { useNewUrlParser: true }  ,(err, res) =>{
   if(err) throw err;
   console.log("Conexion establecida");
 });
