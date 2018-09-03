@@ -42,5 +42,9 @@ if ( process.env.NODE_ENV === 'dev' ){
 
 //Creando processdo de entorno
 process.env.URL_DB = urlBD;
-console.log(process.env.URL_DB);
-console.log(process.env.SEED);
+
+//====================
+//  Google Client ID
+//====================
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '811321572132-vlvebmql4ps76eqt5ftt6n6kpi0e24gj.apps.googleusercontent.com';
