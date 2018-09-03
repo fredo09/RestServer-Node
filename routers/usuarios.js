@@ -11,8 +11,11 @@ const app = express();
 //Se require el Schema del Usuario
 const Usuario = require('../server/models/usuarios');
 
+//Obteniendo la funcion en la que se extrae la el token de autenticacion
+const { VerificacionToken } = require('../server/middlewares/autenticacion')
+
 //Obtener Obsuarios
-app.get('/usuario',(req,res) =>{
+app.get('/usuario', VerificacionToken ,(req,res) => {
 
   //Obtener el dato desde para cargar la lista de usuarios en la cunsulta a MongoDB
   let desde = req.query.desde || 0
@@ -41,7 +44,7 @@ app.get('/usuario',(req,res) =>{
 })
 
 //Crear Usuarios
-app.post('/usuario', (req,res) =>{
+app.post('/usuario', VerificacionToken , (req,res) =>{
   let body = req.body;
 
   //Nueva Instancia de Usuario
@@ -67,7 +70,7 @@ app.post('/usuario', (req,res) =>{
 })
 
 //Actualiza Usuarios
-app.put('/usuario/:Id', (req,res) =>{
+app.put('/usuario/:Id', VerificacionToken ,(req,res) =>{
 
   let id = req.params.Id;// opteniendo el id de la url de la peticion
 
@@ -83,8 +86,8 @@ app.put('/usuario/:Id', (req,res) =>{
 
 })
 
-//Elimina Usuarios
-app.delete('/usuario/:Id', (req,res) =>{
+//Eliminar Usuarios
+app.delete('/usuario/:Id', VerificacionToken ,(req,res) =>{
 
   let id = req.params.Id;
 

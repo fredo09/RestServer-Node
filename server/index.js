@@ -7,14 +7,15 @@ require('./config')
 
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
+
 const express = require('express');
 const app = express();
-
 
 //Middlewares
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json()) //Permite mensajes con estructura tipo JSON
 
+//Rutas Globales del todo el sistema
 app.use(require('../routers'))
 
 //Conexion a mongodb
