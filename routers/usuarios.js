@@ -12,7 +12,7 @@ const app = express();
 const Usuario = require('../server/models/usuarios');
 
 //Obteniendo la funcion en la que se extrae la el token de autenticacion
-const { VerificacionToken } = require('../server/middlewares/autenticacion')
+const { VerificacionToken, VerificarRole } = require('../server/middlewares/autenticacion')
 
 //Obtener Obsuarios
 app.get('/usuario', VerificacionToken ,(req,res) => {
@@ -24,7 +24,7 @@ app.get('/usuario', VerificacionToken ,(req,res) => {
   limite = Number(limite)
 
   //Busqueda de todos los usarios ocultando algunos campos
-  Usuario.find({estado:true},{_id:0,nombre:1,email:1,img:1,estado:1})
+  Usuario.find({estado:true},{_id:1,nombre:1,email:1,img:1,estado:1,role:1})
   .skip(desde)
   .limit(limite)
   .exec(( err, usuarioBD ) => { //Ejecutar consulta
@@ -44,7 +44,7 @@ app.get('/usuario', VerificacionToken ,(req,res) => {
 })
 
 //Crear Usuarios
-app.post('/usuario', VerificacionToken , (req,res) =>{
+app.post('/usuario', [VerificacionToken,VerificarRole] , (req,res) =>{
   let body = req.body;
 
   //Nueva Instancia de Usuario
@@ -70,7 +70,7 @@ app.post('/usuario', VerificacionToken , (req,res) =>{
 })
 
 //Actualiza Usuarios
-app.put('/usuario/:Id', VerificacionToken ,(req,res) =>{
+app.put('/usuario/:Id', [VerificacionToken,VerificarRole] ,(req,res) =>{
 
   let id = req.params.Id;// opteniendo el id de la url de la peticion
 
@@ -87,7 +87,7 @@ app.put('/usuario/:Id', VerificacionToken ,(req,res) =>{
 })
 
 //Eliminar Usuarios
-app.delete('/usuario/:Id', VerificacionToken ,(req,res) =>{
+app.delete('/usuario/:Id', [VerificacionToken,VerificarRole] ,(req,res) =>{
 
   let id = req.params.Id;
 

@@ -43,15 +43,21 @@ let VerificacionToken  = (req, res , next ) => {
 
 let VerificarRole = (req, res, next) => {
 
-    let token = req.get('token');
+    let usuarioAdmin = req.usuario
 
-    jwt.vefiry(token, process.env.SEED , (err, decoded) => {
-
-    })
+    if(usuarioAdmin.role !== 'ADMIN_ROLE'){
+      res.status(400).send({
+        Status: 'Error',
+        message: 'No tienes permisos de Administrador'
+      });
+    }else {
+      next();
+    }
 }
 
 //Exportando
 
 module.exports = {
-  VerificacionToken
+  VerificacionToken,
+  VerificarRole
 }
