@@ -50,7 +50,7 @@ app.post('/login',(req,res) => {
     let token = jwt.sign(
       //Informacion del token
     {usuarioBD},
-     process.env.SEED,
+    process.env.SEED,
     {expiresIn: process.env.CADUCIDAD_TOKEN}
 
   );
