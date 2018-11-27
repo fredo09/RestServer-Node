@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
 //Asignando Schema
-let Schema =mongoose.Schema;
+let Schema = mongoose.Schema;
 
 //Roles Validos
 let rolesValidos = {
@@ -30,7 +30,7 @@ let usuarioSchema = new Schema({
   },
   password:{
     type:String,
-    required: [true, 'El passwd es requerido']
+    required: [true, 'El password es requerido']
   },
   img:{
     type:String,

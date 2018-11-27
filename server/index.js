@@ -17,7 +17,7 @@ app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json()) //Permite mensajes con estructura tipo JSON
 
 //Habilitar la carpeta public resolviendo con el modulo de path que viene con node
-app.use(express.static( path.resolve(__dirname , '../public') ));
+app.use(express.static(path.resolve(__dirname , '../public')));
 
 //Rutas Globales del todo el sistema
 app.use(require('../routers'))

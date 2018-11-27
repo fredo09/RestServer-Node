@@ -55,9 +55,40 @@ let VerificarRole = (req, res, next) => {
     }
 }
 
-//Exportando
+// ==========================
+// VERFICICACION DE TOKEN IMG
+// ==========================
 
+let VerificacionTokenImg = (req, res, next) =>{
+  //recuperando el TOKEN
+  let token = req.query.token;
+  //jwt.verify('token, semilla (SEED), Callback(err, decode 'token decodificado')')
+  jwt.verify(token , process.env.SEED , (err, decoded) => {
+
+    if(err){
+      return res.status(401).send({
+        Status : 'Error',
+        err:{
+          message: "Token no valido"
+        }
+      })
+    }
+
+    //tener toda la informacion del usuario en cualquier peticion
+    req.usuario = decoded.usuarioBD;
+
+    console.log(req.usuario);
+
+    //Verifica el token y sigue corriendo el programa
+    next();
+  });
+
+}
+
+
+//Exportando
 module.exports = {
   VerificacionToken,
-  VerificarRole
+  VerificarRole,
+  VerificacionTokenImg
 }
